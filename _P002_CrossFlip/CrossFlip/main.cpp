@@ -9,8 +9,9 @@
 #include <fstream>
 #include <boost/dynamic_bitset.hpp>
 #include <QTime>
-
-
+#define USER "user"
+#define PASSWORD "password"
+#include <sstream>
 using namespace std;
 using namespace Eigen;
 
@@ -22,7 +23,9 @@ int main(){
    data.open("/home/fettpet/resultBit.html", std::ios::out| std::ios::app);
 
    for(int i=0; i< 200; ++i){
-        std::system("curl --data \"name=fettpet&password=hahn181991\" -o /tmp/source.html http://www.hacker.org/cross/index.php");
+       std::stringstream str;
+       str << "curl --data \"name=" << USER << "&password=" << PASSWORD << "\" -o /tmp/source.html http://www.hacker.org/cross/index.php";
+        std::system(str.str().c_str());
 
         QFile file("/tmp/source.html");
         file.open(QFile::ReadOnly);
@@ -38,7 +41,7 @@ int main(){
              << "<th>(" << buffer.getSizeX() << ", " << buffer.getSizeY() << ")</th>"
              << "<th>" << timer.elapsed() / 1000 << "</th></tr>" << std::endl;
         std::stringstream sol;
-        sol << "curl --data \"name=fettpet&password=hahn181991&sol=" <<  solutionString.toStdString() << "\""
+        sol << "curl --data \"name=" << USER << "&password=" << PASSWORD << "&sol=" <<  solutionString.toStdString() << "\""
             << " -o /tmp/error.html http://www.hacker.org/cross/index.php";
         std::system(sol.str().c_str());
    }

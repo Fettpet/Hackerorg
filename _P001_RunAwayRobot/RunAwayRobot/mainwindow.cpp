@@ -8,6 +8,8 @@
 #include <QTime>
 #include <iostream>
 
+#define USER "user"
+#define PASSWORD "password"
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -24,8 +26,7 @@ void MainWindow::start(){
     unsigned int level = 504;
     for(int i=level; i<=513; ++i){
         std::stringstream str;
-        str << "/home/fettpet/welt" << i << ".txt";
-        world.ReadFromInternet("fettpet", "hahn181991");
+
         world.setUnreachableToBlocked();
         world.setImpasseToBlock();
        // world.showMessageBox();
@@ -37,8 +38,7 @@ void MainWindow::start(){
         QString result;
         result = back.calculate();
         std::stringstream s; s << "Level: " << i << " time" << timer.elapsed() << " path: " << result.toStdString();
-        ui->textEdit->append(s.str().c_str());
-        world.submitSolution(result, "fettpet", "hahn181991");
+
     }
 }
 */
@@ -55,7 +55,7 @@ void MainWindow::start(){
         timer.start();
         QString result;
         result = back.calculate();
-        world.submitSolution(result, "fettpet", "hahn181991");
+        world.submitSolution(result, USER, PASSWORD);
         std::cerr << "Level: " << level << " time" << timer.elapsed() << " Lösung: " << result.toStdString().c_str() << std::endl;
 }
 

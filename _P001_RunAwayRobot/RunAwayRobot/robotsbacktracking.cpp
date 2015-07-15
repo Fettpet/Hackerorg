@@ -4,7 +4,6 @@
 #include <set>
 #include <algorithm>
 #include <QList>
-#include "bigInt/BigIntegerUtils.hh"
 
 /********************************************************************************************************************************
                                 Konstruktoren
